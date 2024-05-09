@@ -128,10 +128,61 @@ student.rate_lecturer(lecturer, 'Python', 10)
 student.rate_lecturer(lecturer, 'Git', 9)
 
 
-print(some_reviewer)
-print(some_lecturer)
-print(some_student)
+#print(some_reviewer)
+#print(some_lecturer)
+#print(some_student)
 
-print(student)
-print(lecturer)
-print(reviewer)
+#print(student)
+#print(lecturer)
+#print(reviewer)
+
+
+# Создание экземпляров классов
+student1 = Student("Alice", "Smith", "female")
+student2 = Student("Bob", "Johnson", "male")
+
+lecturer1 = Lecturer("John", "Doe")
+lecturer2 = Lecturer("Jane", "Smith")
+
+reviewer1 = Reviewer("Emily", "Brown")
+reviewer2 = Reviewer("Michael", "Williams")
+
+
+
+# Функция для подсчета средней оценки за домашние задания по всем студентам в рамках конкретного курса
+def avg_grade_for_course(students, course):
+    total_grades = 0
+    num_students = 0
+    for student in students:
+        if course in student.grades:
+            total_grades += sum(student.grades[course])
+            num_students += 1
+    if num_students == 0:
+        return 0
+    return total_grades / num_students
+
+# Функция для подсчета средней оценки за лекции всех лекторов в рамках курса
+def avg_lecture_grade_for_course(lecturers, course):
+    total_grades = 0
+    num_lecturers = 0
+    for lecturer in lecturers:
+        if course in lecturer.grades:
+            total_grades += sum(lecturer.grades[course])
+            num_lecturers += 1
+    if num_lecturers == 0:
+        return 0
+    return total_grades / num_lecturers
+
+# Пример использования функций
+students = [student1, student2]
+lecturers = [lecturer1, lecturer2]
+course_name = "Python Course"
+
+student1.rate_hw(student1, course_name, 95)
+student2.rate_hw(student2, course_name, 85)
+
+lecturer1.rate_hw(lecturer1, course_name, 90)
+lecturer2.rate_hw(lecturer2, course_name, 88)
+
+print(f'Средняя оценка за домашние задания по курсу {course_name}: {avg_grade_for_course(students, course_name)}')
+print(f'Средняя оценка за лекции по курсу {course_name}: {avg_lecture_grade_for_course(lecturers, course_name)}')
